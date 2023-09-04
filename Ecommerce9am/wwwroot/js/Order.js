@@ -1,12 +1,32 @@
 ﻿var datatable;
 $(document).ready(function () {
-    LoadDataTable();
-});
+    var url = window.location.search;
+    if (url.includes("PENDING")) {
+        loadDataTable("PENDING");
+    }
+    else if (url.includes("PROCESSING")) {
+        loadDataTable("PROCESSING");
+    }
+    else if (url.includes("SHIPPED")) {
+        loadDataTable("SHIPPED");
+    }
+    else if (url.includes("COMPLETED")) {
+        loadDataTable("COMPLETED");
+    }
+    else if (url.includes("CANCELLED")) {
+        loadDataTable("CANCELLED");
+    }
+    else {
+        loadDataTable("all");
+    }
+}
+);
 
-function LoadDataTable() {
+
+function LoadDataTable(status) {
     datatable = $('#myTable').DataTable({
         "ajax": {
-            url: '/Admin/order/getallorders',
+            url: '/Admin/order/getallorders?status=' + status,
         },
         "columns": [
             { data: 'id', "width": "5%" },

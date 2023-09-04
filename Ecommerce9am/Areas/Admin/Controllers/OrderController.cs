@@ -15,6 +15,7 @@ namespace Ecommerce9am.Areas.Admin.Controllers
             _unitOfWork = unitOfWork;
 
 
+
         }
         public IActionResult Index()
         {
@@ -35,9 +36,19 @@ namespace Ecommerce9am.Areas.Admin.Controllers
         #region-API Calls
         [HttpGet]
         [Authorize]
-        public IActionResult GetAllOrders()
+        public IActionResult GetAllOrders(string status)
         {
-            List<OrderHeader>orderHeaders=_unitOfWork.orderHeader.GetAll(includeProperties:"ApplicationUser").ToList();
+            List<OrderHeader> orderHeaders;
+            if (status == "all")
+            {
+
+            orderHeaders=_unitOfWork.orderHeader.GetAll(includeProperties:"ApplicationUser").ToList();
+            }
+            else
+            {
+                 orderHeaders = _unitOfWork.orderHeader.GetAll(u => u.OrderStatus == status, includeProperties: "ApplicationUser").ToList();
+
+            }
             return Json(new {Data=orderHeaders});
         }
         #endregion

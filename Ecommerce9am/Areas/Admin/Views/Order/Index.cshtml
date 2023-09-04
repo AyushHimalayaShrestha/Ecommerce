@@ -1,4 +1,36 @@
-﻿<h3 class="text-center">Orders</h3>
+﻿@{
+    var status = Context.Request.Query["status"];
+    var pending = "text-primary";
+    var processing = "text-primary";
+    var shipped = "text-primary";
+    var completed= "text-primary";
+    var cancelled = "text-primary";
+    var all = "text-primary";}
+
+<h3 class="text-center">Orders</h3>
+   <div class="d-flex justify-content-between pb-5 pt-2">
+            <span></span>
+            <ul class="list-group list-group-horizontal-sm">
+                <a style="text-decoration:none;" asp-controller="Order" asp-action="Index" asp-route-status="PENDING">
+                <li class="list-group-item @pending">PENDING</li>
+                </a>
+                <a style="text-decoration:none;" asp-controller="Order" asp-action="Index" asp-route-status="PROCESSING">
+                <li class="list-group-item @processing">PROCESSING</li>
+                </a>
+                <a style="text-decoration:none;" asp-controller="Order" asp-action="Index" asp-route-status="SHIPPED">
+                <li class="list-group-item @shipped">SHIPPED</li>
+                </a>
+                <a style="text-decoration:none;" asp-controller="Order" asp-action="Index" asp-route-status="COMPLETED">
+                <li class="list-group-item @completed">COMPLETED</li>
+                </a>
+                <a style="text-decoration:none;" asp-controller="Order" asp-action="Index" asp-route-status="CANCELLED">
+                <li class="list-group-item @cancelled">CANCELLED</li>
+                </a>
+                <a style="text-decoration:none;" asp-controller="Order" asp-action="Index" asp-route-status="all">
+                <li class="list-group-item @all">ALL</li>
+                </a>
+            </ul>
+        </div>
 <table class="table table-bordered table-hover w-75 mx-auto text-center" id="myTable">
     <thead class="table-dark">
         <tr>
