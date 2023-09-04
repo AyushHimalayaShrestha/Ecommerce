@@ -1,0 +1,34 @@
+﻿@using Model;
+@model ShoppingCart
+@{
+    ViewData["Title"] = "Product Details";
+}
+<form asp-area="Customer"  asp-controller="ShoppingCart" asp-action="AddToCart">
+    <input type="hidden" asp-for="Product" />
+    <input type="hidden" asp-for="ProductId" />
+<div class="card">
+    <div class="card-header">
+        <a asp-action="ViewProducts">..Go Back</a>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-6">
+                <img src="~/Images/Products/@Model.Product.ImageUrl" class="w-100"/>
+
+            </div>
+            <div class="col-md-6 p-5">
+                <h2>@Model.Product.Title</h2>
+                <h3>Rating: @Model.Product.Rating</h3>
+                <h4>Description:</h4>
+                <p>@Model.Product.Description</p>
+                <h4>Price: @Model.Product.Price</h4>
+                <div class="d-flex w-50">
+                    <h4 class="me-3">Quantity:</h4>
+                    <input asp-for="Quantity" type="number" class="form-control" />
+                </div>
+                <button class="btn btn-warning m-3">Add to Cart </button>
+            </div>
+        </div>
+    </div>
+</div>
+</form>

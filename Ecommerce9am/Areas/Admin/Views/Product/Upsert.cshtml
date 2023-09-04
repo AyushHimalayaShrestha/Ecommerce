@@ -1,0 +1,83 @@
+﻿@model ProductViewModel
+@{
+    ViewData["Title"] = "Add Product";
+}
+
+<div asp-validation-summary="All"></div>
+<div class="card w-50 my-5 shadow-lg rounded rounded-3 mx-auto">
+    <div class="card-header bg-dark text-white py-5">
+        @if (Model.product.ID == 0)
+        {
+            
+        <h3 class="text-center text-decoration-underline">
+            Add New Product
+            </h3>
+
+        }
+        else
+        {
+            <h3 class="text-center text-decoration-underline">
+                Update Product
+            </h3>
+        }
+    </div>
+    <div class="card-body p-5">
+        <form method="post" action="Upsert" enctype="multipart/form-data">
+            <input type="hidden" asp-for="product.Rating" value="1" />
+            <input type="hidden" asp-for="product.ID" />
+            <input type="hidden" asp-for="product.ImageUrl" />
+            <div class="form-floating mb-2">
+                <input asp-for="product.Title" class="form-control" placeholder="eg: Product Name"/>
+                <label asp-for="product.Title"></label>
+                <span asp-validation-for="product.Title" class="text-danger fs-6" ></span>
+            </div>
+            <div class="form-floating mb-2">
+                <input asp-for="product.Price" class="form-control" placeholder="eg: 123" />
+                <label asp-for="product.Price"></label>
+                <span asp-validation-for="product.Price" class="text-danger fs-6"></span>
+            </div>
+            <div class="form-floating mb-2">
+                <input asp-for="product.Stock" class="form-control" placeholder="eg: Product Name" />
+                <label asp-for="product.Stock"></label>
+                <span asp-validation-for="product.Stock" class="text-danger fs-6"></span>
+            </div>
+            <div class="form-floating mb-2">
+                <textarea asp-for="product.Description" class="form-control" placeholder="eg: Product Name" style="resize:none; height:150px;" ></textarea>
+                <label asp-for="product.Description"></label>
+                <span asp-validation-for="product.Description" class="text-danger fs-6"></span>
+            </div>
+            <div class="form-floating mb-2">
+                <select class="form-control" asp-for="product.CategoryId" asp-items="@Model.categoryList">
+                    <option disabled>SELECT CATEGORY </option>
+                </select>
+                <label asp-for="product.Category"></label>
+                <span asp-validation-for="product.Category"></span>
+            </div>
+            <div class="w-100">
+                @if(Model.product.ID!=0)
+                {
+
+                <img src="~/Images/Products/@Model.product.ImageUrl" />
+                }
+            </div>
+            <div class="form-floating mb-2">
+                <input type="file" class="form-control" placeholder="aaaaa" name="file"/>
+                <label asp-for="product.ImageUrl"></label>
+            </div>
+            @if (Model.product.ID == 0)
+            {
+                
+                <button class="btn btn-warning w-100 mt-3">Add Product</button>
+            }
+            else
+            {
+                <button class="btn btn-warning w-100 mt-3">Update Product</button>
+            }
+        </form>
+
+    </div>
+</div>
+
+@section Scripts{
+    <Partial name="_ValidationScriptsPartial" />
+}

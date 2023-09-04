@@ -1,0 +1,19 @@
+﻿@model Category
+@{
+    ViewData["Title"] = "DeleteCategory";
+}
+
+<h1>DeleteCategory</h1>
+
+<div asp-validation-summary="ModelOnly"></div>
+<form method="post" action="DeleteCategory">
+    <input type="hidden" asp-for="CategoryID" />
+    <label asp-for="CategoryName"></label>
+    <input asp-for="CategoryName" disabled/>
+    <button class="btn btn-danger">Delete Category</button>
+  
+</form>
+
+@section Scripts{
+    <Partial name="_ValidationScriptsPartial" />
+}

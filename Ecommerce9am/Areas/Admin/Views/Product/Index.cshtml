@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Product>
+@{
+    ViewData["Title"] = "Products";
+}
+
+<h1>Products</h1>
+
+<a asp-action="Upsert" class="btn btn-success mb-2">Add New Product</a>
+
+<table role="button" class="table text-center w-75 table-hover table-bordered mx-auto">
+    <thead class="table-dark">
+        <tr>
+            <td>Product Name</td>
+            <td>Image</td>
+            <td>Stock</td>
+            <td>Unit Price</td>
+            <td>Rating</td>
+            <td>Category</td>
+            <td>Action</td>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var obj in @Model)
+        {
+            <tr>
+                <td>@obj.Title</td>
+                <td>
+                    <img src="~/Images/Products/@obj.ImageUrl" alt="@obj.Title" style="height:100px">
+                    </td>
+                    <td>@obj.Stock</td>
+                    <td>@obj.Price</td>
+                    <td>@obj.Rating</td>
+                    <td>@obj.Category.CategoryName</td>
+                    <td>
+                        <div class="d-flex w-100 justify-content-center">
+                    <a class="btn btn-warning" asp-controller="Product" asp-action="Upsert" asp-route-id="@obj.ID">Edit</a>
+                    @*<form asp-controller="Product" asp-action="DeleteProduct" method="post" asp-route-id="@obj.ID">*@
+                        <a class="btn btn-danger" asp-action="DeleteProduct" asp-route-id="@obj.ID">Delete</a>
+@*                    </form>
+*@                    </div>
+                </td>
+
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+

@@ -1,0 +1,73 @@
+﻿@using Model;
+@model ShoppingCartViewModel
+@{
+    ViewData["Title"] = "Cart";
+}
+
+<h1>Cart Items</h1>
+<div class="container">
+    @if(Model.shoppingCarts.Count() == 0)
+    {
+        <div class="alert alert-danger">
+            There is no Item in the Cart.
+        </div>
+    }
+    else
+    {
+      <div class="container-fluid">
+          <div class="row">
+
+              <div class="col-md-9">
+
+    <table class="table table-bordered table-hover align-middle text-center">
+        <thead class="table-dark">
+            <tr>
+                <td>Product</td>
+                <td>Product Name</td>
+                <td>Price</td>
+                <td>Quantity</td>
+                <td>Total</td>
+                <td>Action</td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var item in Model.shoppingCarts)
+            {
+                <tr>
+                    <td>
+                        <img src="~/Images/Products/@item.Product.ImageUrl" alt="@item.Product.Title" style="height:100px">
+                    </td>
+                    <td><h4>@item.Product.Title</h4></td>
+                    <td><h4>Rs.@item.Product.Price</h4></td>
+                    
+                    <td>
+                        <div class="btn-group">
+                            <a asp-action="Decrease" asp-route-ProductId="@item.ProductId" class="btn btn-warning">-</a>
+                       
+                        <h4 class="p-2">@item.Quantity</h4>
+                        <a asp-action="Increase" asp-route-ProductId="@item.ProductId" class="btn btn-success">+</a>
+                        </div>
+                        </td>
+
+                    <td><h4>Rs.@(item.Product.Price * item.Quantity)</h4></td>
+                    <td>
+                        <a asp-action="Remove" asp-route-ProductId="@item.ProductId" class="btn btn-danger">
+                            <i class="bi bi-trash"></i>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+              </div>
+              <div class="col-md-3">
+                  <h3><u>Cart Summary</u></h3>
+                  <h4>Cart Total: @Model.OrderHeader.OrderTotal </h4>
+                  <a asp-action="Checkout" class="btn btn-warning w-100">Proceed To CheckOut</a>
+                  </div>
+              </div>
+          </div>
+
+    }
+</div>
+

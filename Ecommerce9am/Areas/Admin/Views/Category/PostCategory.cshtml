@@ -1,0 +1,17 @@
+﻿@model Category
+@{
+    ViewData["Title"] = "Add Category";
+}
+
+<h1>Add New Category</h1>
+<div asp-validation-summary="All"></div>
+<form  method="post" action="PostCategory">
+    <label asp-for="CategoryName"></label>
+    <input asp-for="CategoryName" />
+    <button class="btn btn-warning">Add Category</button>
+    <span asp-validation-for="CategoryName"></span>
+</form>
+
+@section Scripts{
+    <Partial name="_ValidationScriptsPartial" />
+}

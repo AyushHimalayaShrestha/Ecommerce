@@ -1,0 +1,100 @@
+﻿@using Model;
+@model OrderViewModel
+
+<div class="container d-flex">
+    <form class="w-50 p-5">
+        <div class="d-flex align-items-center">
+            <div class="col-4">
+                <label>Name</label>
+                </div>
+            <div class="col-8"> 
+                <input asp-for="OrderHeader.Name" class="form-control" />
+                </div>
+        </div>
+        <div class="d-flex align-items-center">
+            <div class="col-4">
+                <label>Street Address</label>
+            </div>
+            <div class="col-8">
+                <input asp-for="OrderHeader.StreetAddress" class="form-control" />
+            </div>
+        </div>
+        <div class="d-flex align-items-center">
+            <div class="col-4">
+                <label>City</label>
+            </div>
+            <div class="col-8">
+                <input asp-for="OrderHeader.City" class="form-control" />
+            </div>
+        </div>
+        <div class="d-flex align-items-center">
+            <div class="col-4">
+                <label>Postal Code</label>
+            </div>
+            <div class="col-8">
+                <input asp-for="OrderHeader.PostalCode" class="form-control" />
+            </div>
+                </div>
+            <div class="d-flex align-items-center">
+                <div class="col-4">
+                    <label>Country</label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="OrderHeader.Country" class="form-control" />
+            </div>
+        </div>
+        <div class="d-flex align-items-center">
+            <div class="col-4">
+                <label>Phone Number</label>
+            </div>
+            <div class="col-8">
+                <input asp-for="OrderHeader.PhoneNumber" class="form-control " />
+            </div>
+        </div>
+        <div class="d-flex align-items-center">
+            <div class="col-4">
+                <label>Payment Status</label>
+            </div>
+            <div class="col-8">
+                <input asp-for="OrderHeader.PaymentStatus" class="form-control " disabled />
+            </div>
+        </div>
+        <div class="d-flex align-items-center">
+            <div class="col-4">
+                <label>Order Status</label>
+            </div>
+            <div class="col-8">
+                <input asp-for="OrderHeader.OrderStatus" class="form-control " disabled />
+            </div>
+        </div>
+        <div class="d-flex align-items-center">
+            <div class="col-4">
+                <label>Order Date</label>
+            </div>
+            <div class="col-8">
+                <input type="date" asp-for="OrderHeader.OrderDate" class="form-control " disabled/>
+            </div>
+        </div>
+        <button class="btn btn-warning mt-2 w-100">Update Order</button>
+    </form>
+    <div class="w-50 p-5">
+        @foreach(var item in Model.OrderDetails)
+        {
+            
+        <div class="row">
+            <div class="col-3">
+                <img src="~/Images/Products/@item.Product.ImageUrl" class="w-100"/>
+            </div>
+            <div class="col-6">
+                <h6 class="text-truncate"title="@item.Product.Title">@item.Product.Title</h6>
+                <h5>Rs.@item.Price*@item.Quantity</h5>
+            </div>
+            <div class="col-3">
+                    <h3>Rs.@(@item.Price*@item.Quantity)</h3>
+
+            </div>
+        </div>
+        <hr />
+        }
+    </div>
+</div>
